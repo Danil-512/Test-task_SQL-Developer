@@ -1,13 +1,13 @@
--- Врачи
+-- Р’СЂР°С‡Рё
 create table DOCTOR (
-  DCODE integer PRIMARY KEY,  -- Ключ врача
-  DNAME varchar(255)          -- Полное имя врача
+  DCODE integer PRIMARY KEY,  -- РљР»СЋС‡ РІСЂР°С‡Р°
+  DNAME varchar(255)          -- РџРѕР»РЅРѕРµ РёРјСЏ РІСЂР°С‡Р°
 );
 
 insert all 
-  into DOCTOR (DCODE, DNAME) values (1, 'Иванов И.И.')
-  into DOCTOR (DCODE, DNAME) values (2, 'Петров П.П.')
-  into DOCTOR (DCODE, DNAME) values (3, 'Васильев В.В.')
+  into DOCTOR (DCODE, DNAME) values (1, 'РРІР°РЅРѕРІ Р.Р.')
+  into DOCTOR (DCODE, DNAME) values (2, 'РџРµС‚СЂРѕРІ Рџ.Рџ.')
+  into DOCTOR (DCODE, DNAME) values (3, 'Р’Р°СЃРёР»СЊРµРІ Р’.Р’.')
 select * from dual
 ;
 
@@ -15,16 +15,16 @@ select *
   from DOCTOR;
 
 
--- Страховые компании и другие юр.лица
+-- РЎС‚СЂР°С…РѕРІС‹Рµ РєРѕРјРїР°РЅРёРё Рё РґСЂСѓРіРёРµ СЋСЂ.Р»РёС†Р°
 create table JPERSONS (
-  JID   integer PRIMARY KEY, -- Ключ компании 
-  JNAME varchar(255)         -- Название компании
+  JID   integer PRIMARY KEY, -- РљР»СЋС‡ РєРѕРјРїР°РЅРёРё 
+  JNAME varchar(255)         -- РќР°Р·РІР°РЅРёРµ РєРѕРјРїР°РЅРёРё
 );
 
 insert all 
-  into JPERSONS (JID, JNAME) values (1, 'ООО "Ромашка"')
-  into JPERSONS (JID, JNAME) values (2, 'ООО "СТРАХХОЛДИНГ"')
-  into JPERSONS (JID, JNAME) values (3, 'ООО "ЦВЕТ"')
+  into JPERSONS (JID, JNAME) values (1, 'РћРћРћ "Р РѕРјР°С€РєР°"')
+  into JPERSONS (JID, JNAME) values (2, 'РћРћРћ "РЎРўР РђРҐРҐРћР›Р”РРќР“"')
+  into JPERSONS (JID, JNAME) values (3, 'РћРћРћ "Р¦Р’Р•Рў"')
 select * from dual
 ;
 
@@ -32,12 +32,12 @@ select *
   from JPERSONS;
 
 
--- Договоры со страховыми компаниями и организациями
+-- Р”РѕРіРѕРІРѕСЂС‹ СЃРѕ СЃС‚СЂР°С…РѕРІС‹РјРё РєРѕРјРїР°РЅРёСЏРјРё Рё РѕСЂРіР°РЅРёР·Р°С†РёСЏРјРё
 create table JPAGREEMENT (
-  AGRID integer PRIMARY KEY,  -- Ключ договора
-  AGNUM varchar(255),         -- Номер договора
-  JID   integer,              -- Ключ страховой компании
-  -- Внешний ключ JID на таблицу JPERSONS
+  AGRID integer PRIMARY KEY,  -- РљР»СЋС‡ РґРѕРіРѕРІРѕСЂР°
+  AGNUM varchar(255),         -- РќРѕРјРµСЂ РґРѕРіРѕРІРѕСЂР°
+  JID   integer,              -- РљР»СЋС‡ СЃС‚СЂР°С…РѕРІРѕР№ РєРѕРјРїР°РЅРёРё
+  -- Р’РЅРµС€РЅРёР№ РєР»СЋС‡ JID РЅР° С‚Р°Р±Р»РёС†Сѓ JPERSONS
   CONSTRAINT JID_JPAGREEMENT_fk FOREIGN KEY (JID) REFERENCES JPERSONS(JID)
 );
 
@@ -52,43 +52,47 @@ select *
   from JPAGREEMENT;
   
   
--- Пациенты
+-- РџР°С†РёРµРЅС‚С‹
 create table CLIENTS (
-  PCODE    integer PRIMARY KEY, -- Ключ пациента
-  FULLNAME varchar(255),        -- Полное имя пациента
-  BDATE    date                 -- Дата рождения пациента
+  PCODE    integer PRIMARY KEY, -- РљР»СЋС‡ РїР°С†РёРµРЅС‚Р°
+  FULLNAME varchar(255),        -- РџРѕР»РЅРѕРµ РёРјСЏ РїР°С†РёРµРЅС‚Р°
+  BDATE    date                 -- Р”Р°С‚Р° СЂРѕР¶РґРµРЅРёСЏ РїР°С†РёРµРЅС‚Р°
 );
 
 insert all 
-  into CLIENTS (PCODE, FULLNAME, BDATE) values (1, 'Василий Васильевич', to_date('01.01.2000', 'dd.mm.yyyy'))
-  into CLIENTS (PCODE, FULLNAME, BDATE) values (2, 'Иван Иванович', to_date('02.02.2002', 'dd.mm.yyyy'))
-  into CLIENTS (PCODE, FULLNAME, BDATE) values (3, 'Петр Петрович', to_date('03.03.2003', 'dd.mm.yyyy'))
+  into CLIENTS (PCODE, FULLNAME, BDATE) values (1, 'Р’Р°СЃРёР»РёР№ Р’Р°СЃРёР»СЊРµРІРёС‡', to_date('01.01.2000', 'dd.mm.yyyy'))
+  into CLIENTS (PCODE, FULLNAME, BDATE) values (2, 'РРІР°РЅ РРІР°РЅРѕРІРёС‡', to_date('02.02.2002', 'dd.mm.yyyy'))
+  into CLIENTS (PCODE, FULLNAME, BDATE) values (3, 'РџРµС‚СЂ РџРµС‚СЂРѕРІРёС‡', to_date('03.03.2003', 'dd.mm.yyyy'))
+  into CLIENTS (PCODE, FULLNAME) values (4, 'Р’Р»Р°РґРёРјРёСЂ Р’Р»Р°РґРёРјРёСЂРѕРІРёС‡')
+  into CLIENTS (PCODE, FULLNAME, BDATE) values (5, 'РџРµС‚СЂ РџРµС‚СЂРѕРІРёС‡', to_date('03.03.2003', 'dd.mm.yyyy'))
 select * from dual
 ;
+
+
 
 select *
   from CLIENTS;
 
 
--- Страховые прикрепления (полисы)
+-- РЎС‚СЂР°С…РѕРІС‹Рµ РїСЂРёРєСЂРµРїР»РµРЅРёСЏ (РїРѕР»РёСЃС‹)
 create table CLHISTNUM (
-  HISTID    integer PRIMARY KEY,                                     -- Ключ полиса
-  PCODE     integer,                                                 -- Ключ клиента
+  HISTID    integer PRIMARY KEY,                                     -- РљР»СЋС‡ РїРѕР»РёСЃР°
+  PCODE     integer,                                                 -- РљР»СЋС‡ РєР»РёРµРЅС‚Р°
   CONSTRAINT PCODE_CLHISTNUM_fk FOREIGN KEY (PCODE) REFERENCES CLIENTS(PCODE),
-  BDATE     date,                                                    -- Дата начала действия полиса
-  FDATE     date,                                                    -- Дата окончания действия полиса
-  NSP       varchar(255),                                            -- Номер страхового полиса
-  AMOUNTRUE decimal(20, 2),                                          -- Страховая сумма
-  AGRID     integer,                                                 -- Ид страховой компании
+  BDATE     date,                                                    -- Р”Р°С‚Р° РЅР°С‡Р°Р»Р° РґРµР№СЃС‚РІРёСЏ РїРѕР»РёСЃР°
+  FDATE     date,                                                    -- Р”Р°С‚Р° РѕРєРѕРЅС‡Р°РЅРёСЏ РґРµР№СЃС‚РІРёСЏ РїРѕР»РёСЃР°
+  NSP       varchar(255),                                            -- РќРѕРјРµСЂ СЃС‚СЂР°С…РѕРІРѕРіРѕ РїРѕР»РёСЃР°
+  AMOUNTRUB decimal(20, 2),                                          -- РЎС‚СЂР°С…РѕРІР°СЏ СЃСѓРјРјР°
+  AGRID     integer,                                                 -- РРґ СЃС‚СЂР°С…РѕРІРѕР№ РєРѕРјРїР°РЅРёРё
   CONSTRAINT AGRID_CLHISTNUM_fk FOREIGN KEY (AGRID) REFERENCES JPAGREEMENT(AGRID)
 );
 
 --drop table CLHISTNUM;
 
 insert all 
-  into CLHISTNUM (HISTID, PCODE, BDATE, FDATE, NSP, AMOUNTRUE, AGRID) values (1, 1, to_date('01.01.2020', 'dd.mm.yyyy'), to_date('01.01.2021', 'dd.mm.yyyy'), '423432423', 100000, 1)
-  into CLHISTNUM (HISTID, PCODE, BDATE, FDATE, NSP, AMOUNTRUE, AGRID) values (2, 2, to_date('02.04.2021', 'dd.mm.yyyy'), to_date('01.01.2023', 'dd.mm.yyyy'), '423432424', 400000, 2)
-  into CLHISTNUM (HISTID, PCODE, BDATE, FDATE, NSP, AMOUNTRUE, AGRID) values (3, 3, to_date('01.12.2019', 'dd.mm.yyyy'), to_date('01.01.2022', 'dd.mm.yyyy'), '423432425', 600000, 3)
+  into CLHISTNUM (HISTID, PCODE, BDATE, FDATE, NSP, AMOUNTRUB, AGRID) values (1, 1, to_date('01.01.2020', 'dd.mm.yyyy'), to_date('01.01.2021', 'dd.mm.yyyy'), '423432423', 100000, 1)
+  into CLHISTNUM (HISTID, PCODE, BDATE, FDATE, NSP, AMOUNTRUB, AGRID) values (2, 2, to_date('02.04.2021', 'dd.mm.yyyy'), to_date('01.01.2023', 'dd.mm.yyyy'), '423432424', 400000, 2)
+  into CLHISTNUM (HISTID, PCODE, BDATE, FDATE, NSP, AMOUNTRUB, AGRID) values (3, 3, to_date('01.12.2019', 'dd.mm.yyyy'), to_date('01.01.2022', 'dd.mm.yyyy'), '423432425', 600000, 3)
 select * from dual
 ;
 
@@ -96,17 +100,17 @@ select *
   from CLHISTNUM;
   
 
--- Приемы
+-- РџСЂРёРµРјС‹
 create table TREAT (
-  TREATCODE  integer PRIMARY KEY,                                     -- Ключ приема
-  PCODE      integer,                                                 -- Ключ пациента
+  TREATCODE  integer PRIMARY KEY,                                     -- РљР»СЋС‡ РїСЂРёРµРјР°
+  PCODE      integer,                                                 -- РљР»СЋС‡ РїР°С†РёРµРЅС‚Р°
   CONSTRAINT PCODE_TREAT_fk FOREIGN KEY (PCODE) REFERENCES CLIENTS(PCODE),
-  DCODE      integer,                                                 -- Ключ доктора
+  DCODE      integer,                                                 -- РљР»СЋС‡ РґРѕРєС‚РѕСЂР°
   CONSTRAINT DCODE_TREAT_fk FOREIGN KEY (DCODE) REFERENCES DOCTOR(DCODE),
-  TREATDATE  date,                                                    -- Дата приема
-  AMOUNTCL   decimal(20, 2),                                          -- Сумма оплаты от клиента
-  AMOUNTJP   decimal(20, 2),                                          -- Сумма оплаты от страховой компании
-  HISTID     integer,                                                -- Ключ полиса
+  TREATDATE  date,                                                    -- Р”Р°С‚Р° РїСЂРёРµРјР°
+  AMOUNTCL   decimal(20, 2),                                          -- РЎСѓРјРјР° РѕРїР»Р°С‚С‹ РѕС‚ РєР»РёРµРЅС‚Р°
+  AMOUNTJP   decimal(20, 2),                                          -- РЎСѓРјРјР° РѕРїР»Р°С‚С‹ РѕС‚ СЃС‚СЂР°С…РѕРІРѕР№ РєРѕРјРїР°РЅРёРё
+  HISTID     integer,                                                -- РљР»СЋС‡ РїРѕР»РёСЃР°
   CONSTRAINT HISTID_TREAT_fk FOREIGN KEY (HISTID) REFERENCES CLHISTNUM(HISTID)
 );
 
@@ -116,6 +120,7 @@ insert all
   into TREAT (TREATCODE, PCODE, DCODE, TREATDATE, AMOUNTCL, AMOUNTJP, HISTID) values (1, 1, 1, to_date('01.01.2021', 'dd.mm.yyyy'), 1000, 10000, 1)
   into TREAT (TREATCODE, PCODE, DCODE, TREATDATE, AMOUNTCL, AMOUNTJP, HISTID) values (2, 2, 2, to_date('01.03.2021', 'dd.mm.yyyy'), 3000, 40000, 2)
   into TREAT (TREATCODE, PCODE, DCODE, TREATDATE, AMOUNTCL, AMOUNTJP, HISTID) values (3, 3, 3, to_date('01.02.2021', 'dd.mm.yyyy'), 5000, 20000, 3)
+  into TREAT (TREATCODE, PCODE, DCODE, TREATDATE, AMOUNTCL, AMOUNTJP, HISTID) values (4, 3, 3, to_date('01.02.2021', 'dd.mm.yyyy'), 6000, 20000, 3)
 select * from dual
 ;
 
@@ -131,6 +136,6 @@ begin
   execute immediate 'drop table JPERSONS';
   execute immediate 'drop table DOCTOR';
   --
-  dbms_output.put_line('Все таблицы удалены!');
+  dbms_output.put_line('Р’СЃРµ С‚Р°Р±Р»РёС†С‹ СѓРґР°Р»РµРЅС‹!');
 end;
 */
